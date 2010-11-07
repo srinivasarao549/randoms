@@ -17,10 +17,12 @@
 		$(function(){
 			
 			var nums = [],
-				start = new Date();
+				start = new Date(),
+				test = {};
+				
+			test.val = 6;
 			
-			$.valEase({
-				from : -2, 
+			$.valEase(test, 'val', {
 				to: 20, 
 				duration : 400, 
 				step: function(num){
@@ -44,6 +46,7 @@
 			function log(text){
 				console.log(text);
 			}
+			
 		});
 		
 	

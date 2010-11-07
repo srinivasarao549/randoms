@@ -12,12 +12,14 @@ called on them.  However, you can call $.valEase to achieve the same effect.
 
 Sample usage:
 
-$.valEase({
-	from : -2, 
+var obj = { prop : 5 };
+
+$.valEase(
+	obj, 'prop', {
 	to: 20, 
 	duration : 1500, 
-	step: function(num){
-		console.log(num);
+	step: function(){
+		console.log(obj.prop);
 	}
 });
 
@@ -25,24 +27,27 @@ $.valEase({
 
 (function( $ ){
 
-  $.valEase = function(options) {
+  $.valEase = function(obj, val, options) {
 	
-	var	dummy = $($('<div>'))
+	var	dummy = $('<div>')
 			.css({ 
-				'val' : options.from || 0 
+				'left' : val || 0 
 			});
-	
+
 	dummy.animate({
-		'val': options.to || 0
+		'left': (options.to || 0)
 	},
+	
 	$.extend(true, {
 		'easing': 'swing',
 		'duration': 1000
-		}, 
+		},
+		 
 		options, {
 			// This funtion cannot be overridden by the options.
 			'step': function(index){
 				options.step(index);
+				obj[val] = index;
 			}
 		})
 	);
