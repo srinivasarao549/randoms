@@ -4,7 +4,7 @@
 
 /* Call from the "framework" directory like so:
 
-	./js steal/clean/directory.js path/to/cean
+	./js steal/clean/directory.js path/to/clean
 */
 
 importPackage(java.io);
@@ -12,14 +12,19 @@ importPackage(java.io);
 load("steal/rhino/steal.js");
 steal.plugins('steal/clean', function () {
 
-	var jsFiles = [];
+	var jsFiles = [],
+		unwriteables = [];
 
-	function addJS(fil) {
+	function addJS(file) {
 
-		var path = fil.getCanonicalPath();
+		var path = file.getCanonicalPath();
 
 		if (path.match(/\.js$/)){
-			jsFiles.push(path);
+			if (file.canWrite()) {
+				jsFiles.push(path);
+			} else {
+				unwriteables.push(path)
+			}
 		}
 	}
 
@@ -42,5 +47,15 @@ steal.plugins('steal/clean', function () {
 	for (var i = 0; i < jsFiles.length; i++){
 		steal.clean(jsFiles[i], _args)
 	}
-
+	
+	print('\n\n\n\nStatus: ');
+	print('Files cleaned: ' + jsFiles.length);
+	
+	for (var i = 0; i < unwriteables.length; i++){
+		print('SKIPPED, NOT WRITEABLE: ' + unwriteables[i]);
+	}
+	
+	if (unwriteables.length) {
+		print('\nFiles skipped: ' + unwriteables.length);
+	}
 });
