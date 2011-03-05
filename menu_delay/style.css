@@ -1,0 +1,40 @@
+body {
+	font-family: helvetica;
+}
+
+.menu {
+	background: #c00;
+	color: #ff8;
+	clear: both;
+	font-weight: bold;
+	float: left;
+	margin: 0px;
+	overflow: visible;
+	padding: 14px 22px;
+	visibility: hidden;
+}
+
+.menu ul {
+	padding: 0px;
+}
+
+.menu li {
+	cursor: pointer;
+	list-style: none;
+	position: relative;
+}
+
+.menu li:hover {
+	background: #800;
+}
+
+.menu .level {
+	background: #008;
+	padding: 6px;
+	position: absolute;
+	visibility: hidden;
+}
+
+.opener {
+	display: block;
+}
