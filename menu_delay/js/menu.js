@@ -1,4 +1,4 @@
-/*global $:true, setTimeout:true, clearTimeout:true */
+/*global $:true */
 
 $(function () {
 	var menu,
@@ -19,33 +19,15 @@ $(function () {
 		menu.find('.level').hide();
 	}
 	
-	// vars should be declared up top, but this is just for
-	// demonstration purposes.
-	var timeoutHandle,
-		DELAY_TIME = 1000;
-		
-	function resetTimer () {
-		if (timeoutHandle) {
-			clearTimeout(timeoutHandle);
-		}
-	}
-	
 	function closeMenu () {
 		if (!isMenuOpen) {
 			return;
 		}
 		
-		resetTimer();
-		
-		function _close () {
-			menu.fadeTo(FADE_SPEED, 0, function () {
-				closeAllLevels();
-				timeoutHandle = null;
-				isMenuOpen = false;
-			});
-		}
-		
-		timeoutHandle = setTimeout(_close, DELAY_TIME);
+		menu.fadeTo(FADE_SPEED, 0, function () {
+			closeAllLevels();
+			isMenuOpen = false;
+		});
 	}
 	
 	function getLevelForOpener (opener) {
@@ -108,9 +90,6 @@ $(function () {
 		})
 		.bind('mouseleave', function (ev) {
 			closeMenu();
-		})
-		.bind('mouseover', function () {
-			resetTimer();
 		});
 	/****************************** Event bindings */
 });
