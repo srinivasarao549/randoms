@@ -7,7 +7,8 @@ $(function () {
 		levels,
 		isMenuOpen = false,
 		FADE_SPEED = 250;
-		
+	
+	/* Actions *************************************/
 	function openMenu () {
 		menu.fadeTo(FADE_SPEED, 1, function () {
 			isMenuOpen = true;
@@ -42,7 +43,9 @@ $(function () {
 		closeAllLevels();
 		getLevelForOpener(opener).show();
 	}
-		
+	/************************************* Actions */
+	
+	/* Setup ***************************************/
 	menu = $('.menu');
 	opener = $('.opener');
 	levelOpeners = $('li', menu);
@@ -54,12 +57,6 @@ $(function () {
 		})
 		.fadeTo(0, 0);
 	
-	opener
-		.mouseover(function (ev) {
-			ev.preventDefault();
-			openMenu();
-		});
-		
 	levelOpeners
 		.each(function (index, el) {
 			var correspondingLevel;
@@ -71,27 +68,28 @@ $(function () {
 				'my': 'left top',
 				'at': 'right top',
 				'of': el,
-				'offset': '5 8',
-				'collision': 'none'
+				'offset': '5 8'
 			});
 		});
-		
+	
 	levels.css({
 		'visibility': 'visible',
 		'display': 'none'
 	});
-		
+	/*************************************** Setup */
+	
+	/* Event bindings ******************************/
+	opener
+		.mouseover(function (ev) {
+			openMenu();
+		});
+	
 	menu
-		.delegate('li', 'mouseover', function () {
-			var el = $(this);
-			
-			if (!el.is(':visible')) {
-				return;
-			}
-			
-			openLevelForOpener(el);
+		.delegate('li', 'mouseover', function (ev) {
+			openLevelForOpener($(this));
 		})
 		.bind('mouseleave', function (ev) {
 			closeMenu();
 		});
+	/****************************** Event bindings */
 });
