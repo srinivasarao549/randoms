@@ -5,8 +5,10 @@ $(function () {
 		opener,
 		levelOpeners,
 		levels,
+		timeoutHandle,
 		isMenuOpen = false,
-		FADE_SPEED = 250;
+		FADE_SPEED = 250,
+		DELAY_TIME = 1000;
 	
 	/* Actions *************************************/
 	function openMenu () {
@@ -19,12 +21,7 @@ $(function () {
 		menu.find('.level').hide();
 	}
 	
-	// vars should be declared up top, but this is just for
-	// demonstration purposes.
-	var timeoutHandle,
-		DELAY_TIME = 1000;
-		
-	function resetTimer () {
+	function cancelTimer () {
 		if (timeoutHandle) {
 			clearTimeout(timeoutHandle);
 		}
@@ -35,7 +32,7 @@ $(function () {
 			return;
 		}
 		
-		resetTimer();
+		cancelTimer();
 		
 		function _close () {
 			menu.fadeTo(FADE_SPEED, 0, function () {
@@ -110,7 +107,7 @@ $(function () {
 			closeMenu();
 		})
 		.bind('mouseover', function () {
-			resetTimer();
+			cancelTimer();
 		});
 	/****************************** Event bindings */
 });

@@ -12,26 +12,38 @@
 		<link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8">
 
 		<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
-		<script type="text/javascript" src="js/jquery.ui.position.min.js"></script>
-		<script type="text/javascript" src="js/menu_delay.js"></script>
+		
+		<script type="text/javascript" charset="utf-8">
+			$(function () {
+				$('.test1').height(-50);
+				
+				//alert($('.test1').height());
+			});
+		</script>
+		
+		<style type="text/css">
+			.test1 {
+				background: #f00;
+				height: 400px;
+				width: 300px;
+				top: 50px;
+				left: 50px;
+				
+				position: fixed;
+			}
+			
+			.inner {
+				position: relative;
+			}
+		</style>
+		
 	</head>
 	<body>
-		<a class="opener" href="#">Open the menu.</a>
-		
-		<div class="menu">
-			<ul>
-				<li class="level-1">Drill in level 1</li>
-				<li class="level-2">Drill in level 2</li>
-			</ul>
-			
-			<div class="level level-1">
-				Level 1 contents.
+		<div class="test1">
+			<div class="inner">
+				OMG STUFFS
 			</div>
-			
-			<div class="level level-2">
-				Level 2 contents.
-			</div>
-			
+				
 		</div>
 	</body>
 </html>
